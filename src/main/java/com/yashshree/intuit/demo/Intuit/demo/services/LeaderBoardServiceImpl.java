@@ -4,7 +4,6 @@ import com.yashshree.intuit.demo.Intuit.demo.constants.Constants;
 import com.yashshree.intuit.demo.Intuit.demo.entity.ScoreBoard;
 import com.yashshree.intuit.demo.Intuit.demo.exceptions.*;
 import com.yashshree.intuit.demo.Intuit.demo.repository.ScoreBoardRepository;
-import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,12 +53,12 @@ public class LeaderBoardServiceImpl implements LeaderBoardService{
     }
 
     @Override
-    public void publish(ScoreBoard score){
+    public void publish(ScoreBoard score) throws LeaderboardUpdateFailureException {
         try {
             cache.addtoCache(score);
         } catch (CacheUpdateFailureException e) {
             logger.error("Leader Board Update failed - " + e.getMessage());
-            //throw new LeaderboardUpdateFailureException(e.getMessage());
+            throw new LeaderboardUpdateFailureException(e.getMessage());
         }
     }
 }

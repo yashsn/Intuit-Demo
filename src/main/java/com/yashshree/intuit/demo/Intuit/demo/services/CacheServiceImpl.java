@@ -33,6 +33,7 @@ public class CacheServiceImpl implements CacheService<ScoreBoard> {
                     this.scorePQ.offer(score);
                     usernameToScore.put(score.getUsername(), score);
                 } else {
+                    assert this.scorePQ.peek() != null;
                     if (score.getScore() > this.scorePQ.peek().getScore()) {
                         ScoreBoard removedScore = this.scorePQ.poll();
                         this.scorePQ.add(score);

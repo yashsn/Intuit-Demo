@@ -17,6 +17,7 @@ public class GameController {
     @Autowired
     ScoreIngestionSevice scoreIngestor;
     Logger logger = LoggerFactory.getLogger(GameController.class);
+
     @PostMapping("/addScore")
     public void updateScore(@RequestBody ScoreBoard currentScore) {
         try {

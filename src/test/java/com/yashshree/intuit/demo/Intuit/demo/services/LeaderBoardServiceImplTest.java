@@ -1,45 +1,5 @@
 package com.yashshree.intuit.demo.Intuit.demo.services;
-//
-//import com.yashshree.intuit.demo.Intuit.demo.entity.ScoreBoard;
-//import com.yashshree.intuit.demo.Intuit.demo.exceptions.CacheInitializationException;
-//import com.yashshree.intuit.demo.Intuit.demo.exceptions.LeaderboardNotInitializedException;
-//import com.yashshree.intuit.demo.Intuit.demo.repository.ScoreBoardRepository;
-//import org.assertj.core.api.Assertions;
-//import org.junit.Test;
-//import org.junit.jupiter.api.extension.ExtendWith;
-//import org.mockito.InjectMocks;
-//import org.mockito.Mock;
-//import org.mockito.Mockito;
-//import org.mockito.junit.jupiter.MockitoExtension;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.test.context.junit.jupiter.SpringExtension;
-//
-//import java.util.List;
-//
-//import static org.junit.jupiter.api.Assertions.*;
-//import static org.mockito.Mockito.when;
-//
-//@ExtendWith(SpringExtension.class)
-//public class LeaderBoardServiceTest {
-//    @Mock
-//    private ScoreBoardRepository scoreBoardRepository;
-//
-//    @InjectMocks
-//    private LeaderBoardService leaderBoardService;
-//    @Test
-//    public void getAllPerson() throws LeaderboardNotInitializedException, CacheInitializationException {
-//        ScoreBoard sb=new ScoreBoard("ya",3,400);
-//        //when(scoreBoardRepository.save(Mockito.any(ScoreBoard.class))).thenReturn(sb);
-//        //when(scoreBoardRepository.findAll()).thenReturn(List.of(sb));
-//        Mockito.when(scoreBoardRepository.findAll()).thenReturn(List.of(new ScoreBoard("u1",1,100),
-//                new ScoreBoard("u2",2,300),new ScoreBoard("u3",3,10)));
-//        List<ScoreBoard> returned=leaderBoardService.getTopNPlayers();
-//        Assertions.assertThat(returned).isNotNull();
-//    }
-//
-//}
 
-import com.yashshree.intuit.demo.Intuit.demo.constants.Constants;
 import com.yashshree.intuit.demo.Intuit.demo.entity.ScoreBoard;
 import com.yashshree.intuit.demo.Intuit.demo.exceptions.*;
 import com.yashshree.intuit.demo.Intuit.demo.repository.ScoreBoardRepository;
@@ -130,7 +90,7 @@ public class LeaderBoardServiceImplTest {
     }
 
     @Test
-    public void testPublishSuccess() throws CacheUpdateFailureException {
+    public void testPublishSuccess() throws CacheUpdateFailureException, LeaderboardUpdateFailureException {
         ScoreBoard score = new ScoreBoard();
         doNothing().when(cache).addtoCache(score);
 
@@ -140,7 +100,7 @@ public class LeaderBoardServiceImplTest {
     }
 
     @Test
-    public void testPublishFailure() throws CacheUpdateFailureException {
+    public void testPublishFailure() throws CacheUpdateFailureException, LeaderboardUpdateFailureException {
         ScoreBoard score = new ScoreBoard();
         doThrow(new CacheUpdateFailureException("Update failed")).when(cache).addtoCache(score);
 

@@ -33,7 +33,7 @@ public class ScoreIngestionImpl implements ScoreIngestionSevice, ScoreToLBoard, 
 
     @Override
     public void publishToLeaderBoards(ScoreBoard score) throws LeaderboardUpdateFailureException {
-        for(LeaderBoardService leaderBoardService:allLeaderBoards){
+        for (LeaderBoardService leaderBoardService : allLeaderBoards) {
             leaderBoardService.publish(score);
         }
     }
