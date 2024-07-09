@@ -1,12 +1,5 @@
 package com.yashshree.intuit.demo.Intuit.demo.services;
 
-//import static org.junit.jupiter.api.Assertions.*;
-//
-//class ScoreIngestionImplTest {
-//
-//}
-//package com.yashshree.intuit.demo.Intuit.demo.services;
-
 import com.yashshree.intuit.demo.Intuit.demo.entity.ScoreBoard;
 import com.yashshree.intuit.demo.Intuit.demo.exceptions.DatabaseStorageException;
 import com.yashshree.intuit.demo.Intuit.demo.exceptions.LeaderboardUpdateFailureException;
@@ -17,8 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -48,7 +39,7 @@ public class ScoreIngestionImplTest {
         score.setScore(100);
 
         doNothing().when(leaderBoardService).publish(score);
-        when(scoreBoardRepository.findById(score.getUsername())).thenReturn(Optional.of(new ScoreBoard("hi",1,1)));
+        when(scoreBoardRepository.findById(score.getUsername())).thenReturn(Optional.of(new ScoreBoard("hi", 1, 1)));
 
         scoreIngestionService.registerLeaderBoard(leaderBoardService);
         scoreIngestionService.publish(score);
@@ -75,7 +66,7 @@ public class ScoreIngestionImplTest {
     }
 
     @Test
-    public void testPublishToDBFailure() throws LeaderboardUpdateFailureException, DatabaseStorageException {
+    public void testPublishToDBFailure() throws LeaderboardUpdateFailureException {
         ScoreBoard score = new ScoreBoard();
         score.setUsername("user1");
         score.setScore(100);
@@ -120,7 +111,7 @@ public class ScoreIngestionImplTest {
         score.setId(5);
 
 
-        when(scoreBoardRepository.findById(score.getUsername())).thenReturn(Optional.of(new ScoreBoard("hi",1,1)));
+        when(scoreBoardRepository.findById(score.getUsername())).thenReturn(Optional.of(new ScoreBoard("hi", 1, 1)));
 
         scoreIngestionService.publishToDB(score);
 

@@ -3,7 +3,6 @@ package com.yashshree.intuit.demo.Intuit.demo.controller;
 import com.yashshree.intuit.demo.Intuit.demo.entity.LeaderBoard;
 import com.yashshree.intuit.demo.Intuit.demo.entity.ScoreBoard;
 import com.yashshree.intuit.demo.Intuit.demo.exceptions.LeaderboardNotInitializedException;
-import com.yashshree.intuit.demo.Intuit.demo.repository.ScoreBoardRepository;
 import com.yashshree.intuit.demo.Intuit.demo.services.LeaderBoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

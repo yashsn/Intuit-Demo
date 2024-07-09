@@ -1,12 +1,5 @@
 package com.yashshree.intuit.demo.Intuit.demo.services;
 
-//import static org.junit.jupiter.api.Assertions.*;
-//
-//class CacheServiceImplTest {
-//
-//}
-//package com.yashshree.intuit.demo.Intuit.demo.services;
-
 import com.yashshree.intuit.demo.Intuit.demo.entity.ScoreBoard;
 import com.yashshree.intuit.demo.Intuit.demo.exceptions.CacheInitializationException;
 import com.yashshree.intuit.demo.Intuit.demo.exceptions.CacheUpdateFailureException;
@@ -17,8 +10,6 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.PriorityQueue;
-import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,7 +17,7 @@ public class CacheServiceImplTest {
 
     @InjectMocks
     private CacheServiceImpl cacheService;
-    private int TEST_TOP_N=2;
+    private final int TEST_TOP_N=2;
 
     @BeforeEach
     public void setUp() {
@@ -51,10 +42,8 @@ public class CacheServiceImplTest {
 
     @Test
     public void testInitializeFailure() {
-        List<ScoreBoard> data = null;
-
         CacheInitializationException exception = assertThrows(CacheInitializationException.class, () -> {
-            cacheService.initialize(TEST_TOP_N, data);
+            cacheService.initialize(TEST_TOP_N, null);
         });
 
         assertEquals("Failed to initialize cache", exception.getMessage());
@@ -93,10 +82,8 @@ public class CacheServiceImplTest {
         List<ScoreBoard> data = new ArrayList<>();
         cacheService.initialize(TEST_TOP_N, data);
 
-        ScoreBoard score = null;
-
         CacheUpdateFailureException exception = assertThrows(CacheUpdateFailureException.class, () -> {
-            cacheService.addtoCache(score);
+            cacheService.addtoCache(null);
         });
 
         assertNotNull(exception.getMessage());

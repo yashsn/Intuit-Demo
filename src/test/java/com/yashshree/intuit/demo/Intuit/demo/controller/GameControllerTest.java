@@ -30,7 +30,7 @@ public class GameControllerTest {
 
     @Test
     public void testUpdateScoreSuccess() throws Exception {
-        ScoreBoard currentScore = new ScoreBoard("user1", 1,100);
+        ScoreBoard currentScore = new ScoreBoard("user1", 1, 100);
 
         gameController.updateScore(currentScore);
 
@@ -39,7 +39,7 @@ public class GameControllerTest {
 
     @Test
     public void testUpdateScoreFailure() throws Exception {
-        ScoreBoard currentScore = new ScoreBoard("user1", 1,100);
+        ScoreBoard currentScore = new ScoreBoard("user1", 1, 100);
 
         doThrow(new DatabaseStorageException("Failed to add to DB")).when(scoreIngestor).publish(currentScore);
 

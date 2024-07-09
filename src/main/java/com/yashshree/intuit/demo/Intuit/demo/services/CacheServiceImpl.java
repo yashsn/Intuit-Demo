@@ -1,6 +1,5 @@
 package com.yashshree.intuit.demo.Intuit.demo.services;
 
-import com.yashshree.intuit.demo.Intuit.demo.constants.Constants;
 import com.yashshree.intuit.demo.Intuit.demo.entity.ScoreBoard;
 import com.yashshree.intuit.demo.Intuit.demo.exceptions.CacheInitializationException;
 import com.yashshree.intuit.demo.Intuit.demo.exceptions.CacheUpdateFailureException;
@@ -22,17 +21,13 @@ public class CacheServiceImpl implements CacheService<ScoreBoard> {
         this.rankers = topN;
         try {
             this.scorePQ = new PriorityQueue<>();//max heap
-            //this.scorePQ=new PriorityQueue<>(this.rankers,(a,b)->b.getScore()-a.getScore());//max heap
             this.usernameToScore = new HashMap<>();
             for (ScoreBoard score : data) {
-//            this.scorePQ.add(score);
-//            if(this.usernameToScore.containsKey(score.getUsername())){
-//                if(this.usernameToScore.get(score.getUsername()))
-//            }
                 if (this.scorePQ.size() < rankers) {
                     this.scorePQ.offer(score);
                     usernameToScore.put(score.getUsername(), score);
                 } else {
+                    assert this.scorePQ.peek() != null;
                     if (score.getScore() > this.scorePQ.peek().getScore()) {
                         ScoreBoard removedScore = this.scorePQ.poll();
                         this.scorePQ.add(score);
@@ -54,7 +49,6 @@ public class CacheServiceImpl implements CacheService<ScoreBoard> {
                 ScoreBoard scoreToBeUpdated = usernameToScore.get(data.getUsername());
 
                 if (scoreToBeUpdated.getScore() < data.getScore()) {
-                    //logger.debug("Updating " + scoreToBeUpdated.getPlayerId() + " to " + score.getScore());
                     this.scorePQ.remove(scoreToBeUpdated);
                     this.usernameToScore.put(data.getUsername(), data);
                     this.scorePQ.add(data);
