@@ -100,7 +100,7 @@ public class LeaderBoardServiceImplTest {
     }
 
     @Test
-    public void testPublishFailure() throws CacheUpdateFailureException {
+    public void testPublishFailure() throws CacheUpdateFailureException, LeaderboardUpdateFailureException {
         ScoreBoard score = new ScoreBoard();
         doThrow(new CacheUpdateFailureException("error msg")).when(cache).addtoCache(score);
         LeaderboardUpdateFailureException exception = assertThrows(LeaderboardUpdateFailureException.class, () -> {
